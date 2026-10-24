@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>drowse | Late Night Discord Server for Night Owls</title>
+<meta name="description" content="drowse is a chill Discord community for late nighters: giveaways, social Friday nights, events and voice chats with 15,000+ members. Free to join.">
+<link rel="canonical" href="https://joindrowse.github.io/">
+<link rel="icon" href="images/favicon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="drowse | Late Night Discord Server">
+<meta property="og:description" content="A community and hangout built to unite late nighters. Giveaways, social Friday nights, events, and a chill place to spend your time.">
+<meta property="og:image" content="https://joindrowse.github.io/images/share.jpg">
+<meta property="og:url" content="https://joindrowse.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#141a4a">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What is drowse?",
+     "acceptedAnswer": {"@type": "Answer", "text": "drowse is a Discord community and hangout built for late nighters, with giveaways, social Friday nights, casual events and chill voice chats."}},
+    {"@type": "Question", "name": "Is drowse free to join?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Yes. Joining drowse is free. Click the join button or use the invite link discord.gg/drowse."}},
+    {"@type": "Question", "name": "Is anyone actually awake at night?",
+     "acceptedAnswer": {"@type": "Answer", "text": "Yes. drowse has over 15,000 members and is built around late night hours, so there are people chatting and hanging out in voice long after midnight."}},
+    {"@type": "Question", "name": "Do I have to talk?",
+     "acceptedAnswer": {"@type": "Answer", "text": "No. Plenty of members just hang out, listen in voice channels or join events. Drowse is meant to be a chill place to spend your time, alone or with others."}}
+  ]
+}
+</script>
+
+<style>
+  :root {
+    --night: #0c1033;
+    --deep: #141a4a;
+    --ink: #eef0ff;
+    --soft: #b9bfe6;
+    --glow: #5ff2ff;
+    --violet: #8b6cff;
+    --card: rgba(20, 26, 74, 0.72);
+    --line: rgba(185, 191, 230, 0.18);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--night);
+    color: var(--ink);
+    font: 17px/1.6 "Outfit", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  a { color: var(--glow); }
+  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+  .hero {
+    position: relative;
+    min-height: 92vh;
+    display: flex; align-items: center;
+    background: linear-gradient(180deg, rgba(12,16,51,0.15) 0%, rgba(12,16,51,0.55) 65%, var(--night) 100%),
+                url("images/hero.jpg") center / cover no-repeat;
+    text-align: center;
+  }
+  .hero .wrap { width: 100%; }
+  .icon {
+    width: 112px; height: 112px; border-radius: 28px;
+    border: 2px solid rgba(255,255,255,0.35);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+  }
+  h1 {
+    font-size: clamp(56px, 12vw, 104px); line-height: 1; margin: 18px 0 10px;
+    letter-spacing: -0.03em; font-weight: 700;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+  .tagline { font-size: clamp(18px, 3.2vw, 23px); max-width: 620px; margin: 0 auto 26px; text-shadow: 0 2px 14px rgba(0,0,0,0.6); }
+  .stats { display: flex; gap: 22px; justify-content: center; margin-bottom: 28px; font-size: 16px; flex-wrap: wrap; }
+  .stats > span { background: rgba(12,16,51,0.6); border: 1px solid var(--line); padding: 6px 14px; border-radius: 999px; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #3ddc84; margin-right: 6px; box-shadow: 0 0 8px #3ddc84; }
+  .join {
+    display: inline-block; background: #5865f2; color: #fff; text-decoration: none;
+    font-weight: 600; font-size: 19px; padding: 14px 34px; border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(88,101,242,0.55);
+  }
+  .join:hover { background: #4752c4; }
+  .invite { display: block; margin-top: 12px; color: var(--soft); font-size: 15px; }
+
+  section { padding: 72px 0; }
+  h2 { font-size: 34px; margin: 0 0 8px; letter-spacing: -0.01em; }
+  .sub { color: var(--soft); margin: 0 0 32px; max-width: 640px; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+  .card h3 { margin: 0 0 6px; font-size: 19px; }
+  .card p { margin: 0; color: var(--soft); font-size: 16px; }
+  .card .emoji { font-size: 26px; display: block; margin-bottom: 8px; }
+
+  .who { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+  .who ul { padding-left: 20px; color: var(--soft); }
+  .who li { margin-bottom: 8px; }
+  .who img { width: 100%; border-radius: 18px; border: 1px solid var(--line); }
+
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
+  summary { cursor: pointer; font-weight: 600; font-size: 18px; }
+  details p { color: var(--soft); margin: 10px 0 0; }
+
+  .cta { text-align: center; padding: 80px 0 90px;
+    background: radial-gradient(ellipse at center, rgba(139,108,255,0.25), transparent 70%); }
+  .listings { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 28px; font-size: 15px; }
+  .listings a { color: var(--soft); border: 1px solid var(--line); padding: 6px 14px; border-radius: 999px; text-decoration: none; }
+  .listings a:hover { color: var(--ink); border-color: var(--soft); }
+
+  footer { color: var(--soft); font-size: 14px; text-align: center; padding: 0 0 40px; }
+
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: 1fr; }
+    .who { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <img class="icon" src="images/icon-256.jpg" alt="drowse server icon: a black cat watching city lights under the night sky">
+    <h1>drowse</h1>
+    <p class="tagline">A community and hangout built to unite late nighters. Pull up whenever you can't sleep.</p>
+    <div class="stats">
+      <span><span class="dot"></span><b id="online">1,500+</b> online</span>
+      <span><b id="members">15,000+</b> members</span>
+    </div>
+    <a class="join" href="https://discord.gg/drowse">Join drowse on Discord</a>
+    <span class="invite">discord.gg/drowse &middot; free to join</span>
+  </div>
+</header>
+
+<section id="inside">
+  <div class="wrap">
+    <h2>What's inside</h2>
+    <p class="sub">Come for the events and giveaways, or just to have people around at 3 a.m.</p>
+    <div class="grid">
+      <div class="card">
+        <span class="emoji">🎁</span>
+        <h3>Giveaways</h3>
+        <p>Regular giveaways for members. Keep an eye on the announcements.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">🌙</span>
+        <h3>Social Friday nights</h3>
+        <p>The weekly hangout. Jump in, meet people, and stay up way too late.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">🎉</span>
+        <h3>Casual events</h3>
+        <p>Low-pressure community events. Join in or just watch.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">🎧</span>
+        <h3>Chill voice chats</h3>
+        <p>Voice and stage channels for talking, music, or quiet company.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">🏷️</span>
+        <h3>Server tag</h3>
+        <p>Rep the drowse tag on your profile and find other night owls.</p>
+      </div>
+      <div class="card">
+        <span class="emoji">💬</span>
+        <h3>Chat at any hour</h3>
+        <p>With 15,000+ members, someone's always up when you are.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="who">
+  <div class="wrap who">
+    <div>
+      <h2>Made for night owls</h2>
+      <p class="sub">drowse is for anyone whose day starts winding down when everyone else's is over.</p>
+      <ul>
+        <li>Can't sleep and want someone to talk to</li>
+        <li>Gaming, studying or working late and want company</li>
+        <li>Looking for a chill late night Discord server that's actually active</li>
+        <li>Or just want a calm place to spend your time, alone or with others</li>
+      </ul>
+    </div>
+    <img src="images/hero.jpg" alt="Starry night sky over glowing blue mountains" loading="lazy">
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <h2>FAQ</h2>
+    <p class="sub">Quick answers before you join.</p>
+    <details><summary>What is drowse?</summary>
+      <p>A Discord community and hangout built for late nighters, with giveaways, social Friday nights, casual events and chill voice chats.</p></details>
+    <details><summary>Is it free to join?</summary>
+      <p>Yes. Click the join button or use <a href="https://discord.gg/drowse">discord.gg/drowse</a>.</p></details>
+    <details><summary>Is anyone actually awake at night?</summary>
+      <p>Yes. The whole server is built around late night hours, and with 15,000+ members there are people around long after midnight.</p></details>
+    <details><summary>Do I have to talk?</summary>
+      <p>Not at all. Plenty of members just hang out, listen in voice or join events. Come as you are.</p></details>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="wrap">
+    <h2>Can't sleep? Same.</h2>
+    <p class="sub" style="margin: 0 auto 28px;">Pull up and spend the night with us.</p>
+    <a class="join" href="https://discord.gg/drowse">Join drowse on Discord</a>
+    <div class="listings">
+      <a href="https://disboard.org/server/547886184458616843">Disboard</a>
+      <a href="https://top.gg/discord/servers/547886184458616843/vote">Vote on Top.gg</a>
+      <a href="https://discadia.com/server/drowse/">Discadia</a>
+      <a href="https://discordservers.com/server/547886184458616843">DiscordServers</a>
+    </div>
+  </div>
+</section>
+
+<footer>drowse &middot; a late night Discord community &middot; not affiliated with Discord Inc.</footer>
+
+<script>
+  // live counts from Discord's public invite info; the numbers in the page are the fallback
+  fetch("https://discord.com/api/v10/invites/drowse?with_counts=true")
+    .then(r => r.ok ? r.json() : Promise.reject())
+    .then(d => {
+      const fmt = n => n.toLocaleString("en-US");
+      if (d.approximate_presence_count) document.getElementById("online").textContent = fmt(d.approximate_presence_count);
+      if (d.approximate_member_count) document.getElementById("members").textContent = fmt(d.approximate_member_count);
+    })
+    .catch(() => {});
+</script>
+</body>
+</html>
