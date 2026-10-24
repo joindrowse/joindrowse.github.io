@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>drowse | Late Night Discord Server for Night Owls</title>
 <meta name="description" content="drowse is a chill Discord community for late nighters: giveaways, social Friday nights, events and voice chats with 15,000+ members. Free to join.">
+<meta name="google-site-verification" content="slBHdM3i7SqdqTmZpj3FUxbYvSlIpJJcSG1uMDKeZtU">
 <link rel="canonical" href="https://joindrowse.github.io/">
 <link rel="icon" href="images/favicon.png">
 
@@ -14,11 +15,13 @@
 <meta property="og:image" content="https://joindrowse.github.io/images/share.jpg">
 <meta property="og:url" content="https://joindrowse.github.io/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#141a4a">
+<meta name="theme-color" content="#05071a">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+<script>document.documentElement.classList.add("js");</script>
 
 <script type="application/ld+json">
 {
@@ -32,209 +35,436 @@
     {"@type": "Question", "name": "Is anyone actually awake at night?",
      "acceptedAnswer": {"@type": "Answer", "text": "Yes. drowse has over 15,000 members and is built around late night hours, so there are people chatting and hanging out in voice long after midnight."}},
     {"@type": "Question", "name": "Do I have to talk?",
-     "acceptedAnswer": {"@type": "Answer", "text": "No. Plenty of members just hang out, listen in voice channels or join events. Drowse is meant to be a chill place to spend your time, alone or with others."}}
+     "acceptedAnswer": {"@type": "Answer", "text": "No. Plenty of members just hang out, listen in voice channels or join events. drowse is meant to be a chill place to spend your time, alone or with others."}}
   ]
 }
 </script>
 
 <style>
   :root {
-    --night: #0c1033;
-    --deep: #141a4a;
-    --ink: #eef0ff;
-    --soft: #b9bfe6;
-    --glow: #5ff2ff;
-    --violet: #8b6cff;
-    --card: rgba(20, 26, 74, 0.72);
-    --line: rgba(185, 191, 230, 0.18);
+    --void: #05071a;
+    --night: #080b26;
+    --ink: #f2f4ff;
+    --soft: #aab2e0;
+    --dim: #6f78a8;
+    --cyan: #5ff2ff;
+    --violet: #9a7bff;
+    --glass: rgba(255, 255, 255, 0.045);
+    --glass-hi: rgba(255, 255, 255, 0.09);
+    --edge: rgba(255, 255, 255, 0.11);
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    background: var(--night);
+    min-height: 100vh;
     color: var(--ink);
-    font: 17px/1.6 "Outfit", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    background: var(--void);
+    font: 17px/1.65 "Outfit", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    overflow-x: clip;
   }
-  a { color: var(--glow); }
-  .wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+  html { overflow-x: clip; }
+  a { color: var(--cyan); }
+  ::selection { background: rgba(95, 242, 255, 0.3); }
 
-  .hero {
-    position: relative;
-    min-height: 92vh;
-    display: flex; align-items: center;
-    background: linear-gradient(180deg, rgba(12,16,51,0.15) 0%, rgba(12,16,51,0.55) 65%, var(--night) 100%),
-                url("images/hero.jpg") center / cover no-repeat;
-    text-align: center;
+  /* ---------- fixed layers: sky gradient, stars, aurora, cursor light ---------- */
+  .sky {
+    position: fixed; inset: 0; z-index: -3;
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 115%, rgba(40, 120, 190, 0.35), transparent 70%),
+      linear-gradient(180deg, #0a0e33 0%, #070a24 45%, #05071a 100%);
   }
-  .hero .wrap { width: 100%; }
-  .icon {
-    width: 112px; height: 112px; border-radius: 28px;
-    border: 2px solid rgba(255,255,255,0.35);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.45);
+  #stars { position: fixed; inset: 0; z-index: -2; width: 100%; height: 100%; }
+  .bg { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+  .aurora { position: absolute; inset: -20% -10% auto; height: 70vh; pointer-events: none; filter: blur(70px); opacity: 0.55; }
+  .aurora span { position: absolute; border-radius: 50%; mix-blend-mode: screen; animation: drift 22s ease-in-out infinite alternate; }
+  .aurora span:nth-child(1) { width: 45vw; height: 30vh; left: 5%; top: 20%; background: rgba(95, 242, 255, 0.35); }
+  .aurora span:nth-child(2) { width: 40vw; height: 26vh; left: 45%; top: 10%; background: rgba(154, 123, 255, 0.35); animation-duration: 28s; }
+  .aurora span:nth-child(3) { width: 30vw; height: 22vh; left: 25%; top: 35%; background: rgba(60, 120, 255, 0.3); animation-duration: 34s; }
+  @keyframes drift { from { transform: translate(0, 0) scale(1); } to { transform: translate(8vw, 5vh) scale(1.15); } }
+
+  #glow {
+    position: fixed; z-index: 0; width: 520px; height: 520px; border-radius: 50%; pointer-events: none;
+    background: radial-gradient(circle, rgba(95, 242, 255, 0.10), rgba(154, 123, 255, 0.05) 40%, transparent 70%);
+    transform: translate(-50%, -50%); left: -600px; top: -600px; transition: opacity 0.4s;
   }
-  h1 {
-    font-size: clamp(56px, 12vw, 104px); line-height: 1; margin: 18px 0 10px;
-    letter-spacing: -0.03em; font-weight: 700;
-    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  .progress { position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 50;
+    background: linear-gradient(90deg, var(--violet), var(--cyan)); box-shadow: 0 0 12px var(--cyan); }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; height: 100vh; min-height: 640px; overflow: hidden; display: flex; align-items: center; justify-content: center; text-align: center; }
+  .horizon { position: absolute; left: -10%; right: -10%; bottom: 14%; height: 40%;
+    background: radial-gradient(ellipse 60% 55% at 50% 100%, rgba(95, 242, 255, 0.55), rgba(95, 242, 255, 0.12) 45%, transparent 75%);
+    filter: blur(10px); }
+  .moon { position: absolute; top: 11%; right: 12%; width: 86px; height: 86px; border-radius: 50%;
+    box-shadow: inset -22px 8px 0 0 #e9f6ff, 0 0 60px rgba(200, 235, 255, 0.35); filter: drop-shadow(0 0 18px rgba(200, 235, 255, 0.5)); }
+  .ridges { position: absolute; left: -4%; width: 108%; bottom: -2px; height: 38%; }
+  .ridges svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .hero-content { position: relative; z-index: 2; padding: 0 20px; margin-top: -12vh; max-width: 100%; }
+  .icon { width: 108px; height: 108px; border-radius: 28px; border: 1px solid var(--edge);
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.03), 0 0 50px rgba(95, 242, 255, 0.35); }
+  h1 { font-size: clamp(64px, 14vw, 132px); font-weight: 800; line-height: 1.05; margin: 18px 0 8px; letter-spacing: -0.04em;
+    filter: drop-shadow(0 0 28px rgba(95, 242, 255, 0.35)); }
+  h1 span { display: inline-block; padding-bottom: 0.06em;
+    background: linear-gradient(180deg, #ffffff 30%, #bfe9ff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .js h1 span { opacity: 0; transform: translateY(40px); animation: rise 0.9s cubic-bezier(.2, .8, .2, 1) forwards; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  .tagline { font-size: clamp(18px, 3vw, 22px); font-weight: 300; color: var(--soft); max-width: 600px; margin: 0 auto 10px; }
+  .clock { font-size: 15px; color: var(--cyan); letter-spacing: 0.04em; margin: 0 0 24px; min-height: 1.6em; text-shadow: 0 0 14px rgba(95, 242, 255, 0.6); }
+  .stats { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 30px; }
+  .pill { background: var(--glass); border: 1px solid var(--edge); padding: 7px 16px; border-radius: 999px; font-size: 15px;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+  .pill b { font-weight: 600; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #3ddc84; margin-right: 8px; vertical-align: 1px;
+    box-shadow: 0 0 10px #3ddc84; animation: pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 50% { opacity: 0.45; } }
+  .join { position: relative; display: inline-block; color: #fff; text-decoration: none; font-weight: 600; font-size: 19px;
+    padding: 15px 36px; border-radius: 14px; background: linear-gradient(135deg, #5865f2, #7a5cff);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.15) inset, 0 10px 40px rgba(110, 100, 255, 0.55);
+    transition: transform 0.2s, box-shadow 0.2s; }
+  .join:hover { transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.25) inset, 0 14px 60px rgba(120, 120, 255, 0.8), 0 0 30px rgba(95, 242, 255, 0.4); }
+  .join::after { content: ""; position: absolute; inset: -6px; border-radius: 18px; border: 1px solid rgba(154, 123, 255, 0.6); animation: ring 2.6s ease-out infinite; }
+  @keyframes ring { from { opacity: 0.8; transform: scale(0.96); } to { opacity: 0; transform: scale(1.12); } }
+  .invite { display: block; margin-top: 14px; color: var(--dim); font-size: 14px; letter-spacing: 0.03em; }
+  .scroll-hint { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); z-index: 3; color: var(--dim); font-size: 12px;
+    letter-spacing: 0.25em; text-transform: uppercase; }
+  .scroll-hint::after { content: ""; display: block; width: 1px; height: 34px; margin: 8px auto 0;
+    background: linear-gradient(var(--cyan), transparent); animation: hint 2s ease-in-out infinite; }
+  @keyframes hint { 0% { transform: scaleY(0); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } 51% { transform-origin: bottom; } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+  /* ---------- sections ---------- */
+  main { position: relative; z-index: 1; }
+  .wrap { max-width: 1060px; margin: 0 auto; padding: 0 22px; }
+  section { padding: 96px 0; }
+  .eyebrow { color: var(--cyan); font-size: 13px; letter-spacing: 0.28em; text-transform: uppercase; margin: 0 0 10px; text-shadow: 0 0 12px rgba(95, 242, 255, 0.5); }
+  h2 { font-size: clamp(32px, 5vw, 46px); line-height: 1.1; margin: 0 0 12px; font-weight: 800; letter-spacing: -0.02em; }
+  .sub { color: var(--soft); margin: 0 0 40px; max-width: 620px; font-weight: 300; font-size: 18px; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; perspective: 1000px; }
+  .card { position: relative; padding: 26px; border-radius: 20px; overflow: hidden;
+    background: linear-gradient(160deg, var(--glass-hi), var(--glass) 60%);
+    border: 1px solid var(--edge); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+    transform-style: preserve-3d; transition: transform 0.25s ease-out, border-color 0.3s, box-shadow 0.3s; }
+  .card::before { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 0.3s;
+    background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgba(95, 242, 255, 0.16), transparent 60%); }
+  .card:hover { border-color: rgba(95, 242, 255, 0.35); box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45), 0 0 40px rgba(95, 242, 255, 0.12); }
+  .card:hover::before { opacity: 1; }
+  .card .ico { width: 46px; height: 46px; border-radius: 13px; display: grid; place-items: center; font-size: 22px; margin-bottom: 16px;
+    background: rgba(95, 242, 255, 0.08); border: 1px solid rgba(95, 242, 255, 0.25); box-shadow: 0 0 22px rgba(95, 242, 255, 0.18); }
+  .card h3 { margin: 0 0 6px; font-size: 20px; font-weight: 600; }
+  .card p { margin: 0; color: var(--soft); font-size: 16px; font-weight: 300; }
+
+  .split { display: grid; grid-template-columns: 1fr 1.1fr; gap: 50px; align-items: center; }
+  .split ul { list-style: none; padding: 0; margin: 0; }
+  .split li { padding: 14px 18px; margin-bottom: 10px; border-radius: 14px; background: var(--glass); border: 1px solid var(--edge);
+    color: var(--soft); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+  .split li b { color: var(--ink); font-weight: 600; }
+  .frame { position: relative; border-radius: 22px; padding: 8px; background: linear-gradient(140deg, rgba(95, 242, 255, 0.45), rgba(154, 123, 255, 0.35), rgba(255, 255, 255, 0.05));
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 60px rgba(95, 242, 255, 0.18); }
+  .frame img { display: block; width: 100%; border-radius: 16px; }
+
+  details { background: var(--glass); border: 1px solid var(--edge); border-radius: 16px; padding: 18px 22px; margin-bottom: 12px;
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: border-color 0.3s, background 0.3s; }
+  details[open] { border-color: rgba(95, 242, 255, 0.3); background: var(--glass-hi); }
+  summary { cursor: pointer; font-weight: 600; font-size: 18px; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--cyan); font-size: 24px; font-weight: 300; transition: transform 0.3s; }
+  details[open] summary::after { transform: rotate(45deg); }
+  details p { color: var(--soft); margin: 10px 0 0; font-weight: 300; }
+
+  .cta { text-align: center; padding: 120px 0 130px; position: relative; }
+  .cta::before { content: ""; position: absolute; inset: 10% 15%; z-index: -1; filter: blur(60px); opacity: 0.6;
+    background: conic-gradient(from 0deg, rgba(95, 242, 255, 0.35), rgba(154, 123, 255, 0.35), rgba(60, 120, 255, 0.3), rgba(95, 242, 255, 0.35));
+    animation: spin 18s linear infinite; border-radius: 50%; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .cta h2 { font-size: clamp(40px, 7vw, 72px); }
+  .listings { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 34px; }
+  .listings a { color: var(--soft); background: var(--glass); border: 1px solid var(--edge); padding: 8px 16px; border-radius: 999px;
+    text-decoration: none; font-size: 15px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); transition: color 0.2s, border-color 0.2s, box-shadow 0.2s; }
+  .listings a:hover { color: var(--ink); border-color: rgba(95, 242, 255, 0.4); box-shadow: 0 0 20px rgba(95, 242, 255, 0.2); }
+  footer { color: var(--dim); font-size: 14px; text-align: center; padding: 0 0 46px; position: relative; z-index: 1; }
+
+  .js .reveal { opacity: 0; transform: translateY(36px); transition: opacity 0.9s ease, transform 0.9s cubic-bezier(.2, .8, .2, 1); }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 820px) {
+    .grid, .split { grid-template-columns: 1fr; }
+    .moon { width: 60px; height: 60px; right: 8%; box-shadow: inset -15px 6px 0 0 #e9f6ff, 0 0 40px rgba(200, 235, 255, 0.35); }
+    #glow { display: none; }
   }
-  .tagline { font-size: clamp(18px, 3.2vw, 23px); max-width: 620px; margin: 0 auto 26px; text-shadow: 0 2px 14px rgba(0,0,0,0.6); }
-  .stats { display: flex; gap: 22px; justify-content: center; margin-bottom: 28px; font-size: 16px; flex-wrap: wrap; }
-  .stats > span { background: rgba(12,16,51,0.6); border: 1px solid var(--line); padding: 6px 14px; border-radius: 999px; }
-  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: #3ddc84; margin-right: 6px; box-shadow: 0 0 8px #3ddc84; }
-  .join {
-    display: inline-block; background: #5865f2; color: #fff; text-decoration: none;
-    font-weight: 600; font-size: 19px; padding: 14px 34px; border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(88,101,242,0.55);
-  }
-  .join:hover { background: #4752c4; }
-  .invite { display: block; margin-top: 12px; color: var(--soft); font-size: 15px; }
-
-  section { padding: 72px 0; }
-  h2 { font-size: 34px; margin: 0 0 8px; letter-spacing: -0.01em; }
-  .sub { color: var(--soft); margin: 0 0 32px; max-width: 640px; }
-
-  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
-  .card h3 { margin: 0 0 6px; font-size: 19px; }
-  .card p { margin: 0; color: var(--soft); font-size: 16px; }
-  .card .emoji { font-size: 26px; display: block; margin-bottom: 8px; }
-
-  .who { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
-  .who ul { padding-left: 20px; color: var(--soft); }
-  .who li { margin-bottom: 8px; }
-  .who img { width: 100%; border-radius: 18px; border: 1px solid var(--line); }
-
-  details { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 10px; }
-  summary { cursor: pointer; font-weight: 600; font-size: 18px; }
-  details p { color: var(--soft); margin: 10px 0 0; }
-
-  .cta { text-align: center; padding: 80px 0 90px;
-    background: radial-gradient(ellipse at center, rgba(139,108,255,0.25), transparent 70%); }
-  .listings { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 28px; font-size: 15px; }
-  .listings a { color: var(--soft); border: 1px solid var(--line); padding: 6px 14px; border-radius: 999px; text-decoration: none; }
-  .listings a:hover { color: var(--ink); border-color: var(--soft); }
-
-  footer { color: var(--soft); font-size: 14px; text-align: center; padding: 0 0 40px; }
-
-  @media (max-width: 760px) {
-    .grid { grid-template-columns: 1fr; }
-    .who { grid-template-columns: 1fr; }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+    .js h1 span, .js .reveal { opacity: 1; transform: none; }
   }
 </style>
 </head>
 <body>
 
+<div class="sky"></div>
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="bg" aria-hidden="true"><div class="aurora"><span></span><span></span><span></span></div></div>
+<div id="glow" aria-hidden="true"></div>
+<div class="progress" aria-hidden="true"></div>
+
 <header class="hero">
-  <div class="wrap">
+  <div class="horizon" data-depth="0.5" aria-hidden="true"></div>
+  <div class="moon" data-depth="0.7" aria-hidden="true"></div>
+  <div class="ridges" aria-hidden="true"><svg id="ridges" viewBox="0 0 1600 600" preserveAspectRatio="xMidYMax slice"></svg></div>
+
+  <div class="hero-content" data-depth="0.35">
     <img class="icon" src="images/icon-256.jpg" alt="drowse server icon: a black cat watching city lights under the night sky">
-    <h1>drowse</h1>
-    <p class="tagline">A community and hangout built to unite late nighters. Pull up whenever you can't sleep.</p>
+    <h1 aria-label="drowse"><span aria-hidden="true">d</span><span aria-hidden="true">r</span><span aria-hidden="true">o</span><span aria-hidden="true">w</span><span aria-hidden="true">s</span><span aria-hidden="true">e</span></h1>
+    <p class="tagline">A community and hangout built to unite late nighters.</p>
+    <p class="clock" id="clock"></p>
     <div class="stats">
-      <span><span class="dot"></span><b id="online">1,500+</b> online</span>
-      <span><b id="members">15,000+</b> members</span>
+      <span class="pill"><span class="dot"></span><b id="online">1,500+</b> online now</span>
+      <span class="pill"><b id="members">15,000+</b> members</span>
     </div>
     <a class="join" href="https://discord.gg/drowse">Join drowse on Discord</a>
     <span class="invite">discord.gg/drowse &middot; free to join</span>
   </div>
+  <div class="scroll-hint" aria-hidden="true">scroll</div>
 </header>
 
-<section id="inside">
-  <div class="wrap">
-    <h2>What's inside</h2>
-    <p class="sub">Come for the events and giveaways, or just to have people around at 3 a.m.</p>
-    <div class="grid">
-      <div class="card">
-        <span class="emoji">🎁</span>
-        <h3>Giveaways</h3>
-        <p>Regular giveaways for members. Keep an eye on the announcements.</p>
-      </div>
-      <div class="card">
-        <span class="emoji">🌙</span>
-        <h3>Social Friday nights</h3>
-        <p>The weekly hangout. Jump in, meet people, and stay up way too late.</p>
-      </div>
-      <div class="card">
-        <span class="emoji">🎉</span>
-        <h3>Casual events</h3>
-        <p>Low-pressure community events. Join in or just watch.</p>
-      </div>
-      <div class="card">
-        <span class="emoji">🎧</span>
-        <h3>Chill voice chats</h3>
-        <p>Voice and stage channels for talking, music, or quiet company.</p>
-      </div>
-      <div class="card">
-        <span class="emoji">🏷️</span>
-        <h3>Server tag</h3>
-        <p>Rep the drowse tag on your profile and find other night owls.</p>
-      </div>
-      <div class="card">
-        <span class="emoji">💬</span>
-        <h3>Chat at any hour</h3>
-        <p>With 15,000+ members, someone's always up when you are.</p>
+<main>
+  <section id="inside">
+    <div class="wrap">
+      <p class="eyebrow reveal">what's inside</p>
+      <h2 class="reveal">Everything you need at 3 a.m.</h2>
+      <p class="sub reveal">Come for the events and giveaways, or just to have people around when the rest of the world is asleep.</p>
+      <div class="grid">
+        <div class="card reveal"><div class="ico">🎁</div><h3>Giveaways</h3><p>Regular giveaways for members. Keep an eye on the announcements.</p></div>
+        <div class="card reveal"><div class="ico">🌙</div><h3>Social Friday nights</h3><p>The weekly hangout. Jump in, meet people, and stay up way too late.</p></div>
+        <div class="card reveal"><div class="ico">🎉</div><h3>Casual events</h3><p>Low-pressure community events. Join in or just watch.</p></div>
+        <div class="card reveal"><div class="ico">🎧</div><h3>Chill voice chats</h3><p>Voice and stage channels for talking, music, or quiet company.</p></div>
+        <div class="card reveal"><div class="ico">🏷️</div><h3>Server tag</h3><p>Rep the drowse tag on your profile and find other night owls.</p></div>
+        <div class="card reveal"><div class="ico">💬</div><h3>Chat at any hour</h3><p>With 15,000+ members, someone's always up when you are.</p></div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="who">
-  <div class="wrap who">
-    <div>
-      <h2>Made for night owls</h2>
-      <p class="sub">drowse is for anyone whose day starts winding down when everyone else's is over.</p>
-      <ul>
-        <li>Can't sleep and want someone to talk to</li>
-        <li>Gaming, studying or working late and want company</li>
-        <li>Looking for a chill late night Discord server that's actually active</li>
-        <li>Or just want a calm place to spend your time, alone or with others</li>
-      </ul>
+  <section id="who">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow reveal">made for night owls</p>
+        <h2 class="reveal">When everyone else logs off, we log on.</h2>
+        <p class="sub reveal">drowse is for anyone whose day starts winding down when everyone else's is over.</p>
+        <ul>
+          <li class="reveal"><b>Can't sleep</b> and want someone to talk to</li>
+          <li class="reveal"><b>Gaming, studying or working late</b> and want company</li>
+          <li class="reveal"><b>Looking for a late night Discord</b> that's actually active</li>
+          <li class="reveal"><b>Just want a calm place</b> to spend your time, alone or with others</li>
+        </ul>
+      </div>
+      <div class="frame reveal"><img src="images/hero.jpg" alt="Starry night sky with shooting stars over glowing blue mountains" loading="lazy"></div>
     </div>
-    <img src="images/hero.jpg" alt="Starry night sky over glowing blue mountains" loading="lazy">
-  </div>
-</section>
+  </section>
 
-<section id="faq">
-  <div class="wrap">
-    <h2>FAQ</h2>
-    <p class="sub">Quick answers before you join.</p>
-    <details><summary>What is drowse?</summary>
-      <p>A Discord community and hangout built for late nighters, with giveaways, social Friday nights, casual events and chill voice chats.</p></details>
-    <details><summary>Is it free to join?</summary>
-      <p>Yes. Click the join button or use <a href="https://discord.gg/drowse">discord.gg/drowse</a>.</p></details>
-    <details><summary>Is anyone actually awake at night?</summary>
-      <p>Yes. The whole server is built around late night hours, and with 15,000+ members there are people around long after midnight.</p></details>
-    <details><summary>Do I have to talk?</summary>
-      <p>Not at all. Plenty of members just hang out, listen in voice or join events. Come as you are.</p></details>
-  </div>
-</section>
-
-<section class="cta">
-  <div class="wrap">
-    <h2>Can't sleep? Same.</h2>
-    <p class="sub" style="margin: 0 auto 28px;">Pull up and spend the night with us.</p>
-    <a class="join" href="https://discord.gg/drowse">Join drowse on Discord</a>
-    <div class="listings">
-      <a href="https://disboard.org/server/547886184458616843">Disboard</a>
-      <a href="https://top.gg/discord/servers/547886184458616843/vote">Vote on Top.gg</a>
-      <a href="https://discadia.com/server/drowse/">Discadia</a>
-      <a href="https://discordservers.com/server/547886184458616843">DiscordServers</a>
+  <section id="faq">
+    <div class="wrap" style="max-width: 820px;">
+      <p class="eyebrow reveal">faq</p>
+      <h2 class="reveal">Quick answers before you join</h2>
+      <p class="sub reveal">Still curious? Just hop in and ask.</p>
+      <details class="reveal"><summary>What is drowse?</summary>
+        <p>A Discord community and hangout built for late nighters, with giveaways, social Friday nights, casual events and chill voice chats.</p></details>
+      <details class="reveal"><summary>Is it free to join?</summary>
+        <p>Yes. Click the join button or use <a href="https://discord.gg/drowse">discord.gg/drowse</a>.</p></details>
+      <details class="reveal"><summary>Is anyone actually awake at night?</summary>
+        <p>Yes. The whole server is built around late night hours, and with 15,000+ members there are people around long after midnight.</p></details>
+      <details class="reveal"><summary>Do I have to talk?</summary>
+        <p>Not at all. Plenty of members just hang out, listen in voice or join events. Come as you are.</p></details>
     </div>
-  </div>
-</section>
+  </section>
+
+  <section class="cta">
+    <div class="wrap">
+      <p class="eyebrow reveal">pull up</p>
+      <h2 class="reveal">Can't sleep? Same.</h2>
+      <p class="sub reveal" style="margin: 0 auto 34px;">Spend the night with 15,000 other night owls.</p>
+      <a class="join reveal" id="join2" href="https://discord.gg/drowse">Join drowse on Discord</a>
+      <div class="listings reveal">
+        <a href="https://disboard.org/server/547886184458616843">Disboard</a>
+        <a href="https://top.gg/discord/servers/547886184458616843/vote">Vote on Top.gg</a>
+        <a href="https://discadia.com/server/drowse/">Discadia</a>
+        <a href="https://discordservers.com/server/547886184458616843">DiscordServers</a>
+      </div>
+    </div>
+  </section>
+</main>
 
 <footer>drowse &middot; a late night Discord community &middot; not affiliated with Discord Inc.</footer>
 
 <script>
-  // live counts from Discord's public invite info; the numbers in the page are the fallback
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const mouse = { x: 0, y: 0 };            // -1..1 from screen center
+  let scrollY = window.scrollY;
+
+  // ---------- title letters rise one by one ----------
+  document.querySelectorAll("h1 span").forEach((s, i) => s.style.animationDelay = (0.15 + i * 0.08) + "s");
+
+  // ---------- mountain ridges (drawn in code so they stay sharp at any size) ----------
+  function rng(seed) { return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function ridge(seed, base, amp, rough) {
+    const r = rng(seed), n = 256, h = new Array(n + 1).fill(0);
+    h[0] = r() * amp; h[n] = r() * amp;
+    (function split(a, b, d) { if (b - a < 2) return; const m = (a + b) >> 1;
+      h[m] = (h[a] + h[b]) / 2 + (r() - 0.5) * d; split(a, m, d * rough); split(m, b, d * rough); })(0, n, amp * 1.6);
+    return h.map((v, i) => [i * 1600 / n, Math.min(595, base - Math.max(v, 0))]);
+  }
+  const layers = [
+    { seed: 7,  base: 420, amp: 150, rough: 0.56, top: "#1d2a7a", bottom: "#121a52", depth: 0.42, mx: 6 },
+    { seed: 21, base: 470, amp: 115, rough: 0.53, top: "#141d5c", bottom: "#0d1340", depth: 0.30, mx: 12 },
+    { seed: 42, base: 520, amp: 90,  rough: 0.50, top: "#0d1442", bottom: "#090e30", depth: 0.18, mx: 20 },
+    { seed: 77, base: 568, amp: 60,  rough: 0.48, top: "#070a26", bottom: "#05071a", depth: 0.06, mx: 30 },
+  ];
+  const svg = document.getElementById("ridges"), NS = "http://www.w3.org/2000/svg";
+  const defs = document.createElementNS(NS, "defs"); svg.appendChild(defs);
+  layers.forEach((L, i) => {
+    const pts = ridge(L.seed, L.base, L.amp, L.rough);
+    const grad = document.createElementNS(NS, "linearGradient");
+    grad.id = "g" + i; grad.setAttribute("x1", 0); grad.setAttribute("y1", 0); grad.setAttribute("x2", 0); grad.setAttribute("y2", 1);
+    grad.innerHTML = `<stop offset="0" stop-color="${L.top}"/><stop offset="1" stop-color="${L.bottom}"/>`;
+    defs.appendChild(grad);
+    const g = document.createElementNS(NS, "g");
+    const path = document.createElementNS(NS, "path");
+    path.setAttribute("d", "M0,600 " + pts.map(p => "L" + p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" ") + " L1600,600 Z");
+    path.setAttribute("fill", `url(#g${i})`);
+    // faint rim light on the ridge line
+    const rim = document.createElementNS(NS, "path");
+    rim.setAttribute("d", "M" + pts.map(p => p[0].toFixed(1) + "," + p[1].toFixed(1)).join(" L"));
+    rim.setAttribute("fill", "none"); rim.setAttribute("stroke", i === 0 ? "rgba(95,242,255,0.35)" : "rgba(150,190,255,0.12)");
+    rim.setAttribute("stroke-width", i === 0 ? 1.5 : 1);
+    g.appendChild(path); g.appendChild(rim);
+    if (i === 2) {  // the cat from the server icon, sitting on a peak and watching the sky
+      let best = pts[160]; for (let k = 150; k < 215; k++) if (pts[k][1] < best[1]) best = pts[k];
+      const cat = document.createElementNS(NS, "image");
+      cat.setAttribute("href", "images/cat.png"); cat.setAttribute("width", 46); cat.setAttribute("height", 71);
+      cat.setAttribute("x", best[0] - 23); cat.setAttribute("y", best[1] - 66);
+      g.appendChild(cat);
+    }
+    svg.appendChild(g); L.el = g;
+  });
+
+  // ---------- stars, twinkling and drifting with scroll and mouse ----------
+  const cv = document.getElementById("stars"), ctx = cv.getContext("2d");
+  let W, H, DPR, stars = [], shooters = [];
+  function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2); W = innerWidth; H = innerHeight;
+    cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    const count = Math.min(520, Math.floor(W * H / 2600));
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * W, y: Math.random() * H * 1.4, d: 0.2 + Math.random() * 0.8,
+      r: Math.random() < 0.06 ? 1.4 + Math.random() * 0.9 : 0.4 + Math.random() * 0.9,
+      tw: 0.5 + Math.random() * 2.5, ph: Math.random() * 6.3,
+      hue: Math.random() < 0.15 ? "190,240,255" : Math.random() < 0.1 ? "200,180,255" : "255,255,255" }));
+    if (reduce) draw(0);
+  }
+  function shoot(fromX, fromY) {
+    shooters.push({ x: fromX ?? Math.random() * W * 0.8 + W * 0.1, y: fromY ?? Math.random() * H * 0.35,
+      vx: 9 + Math.random() * 6, vy: 3.5 + Math.random() * 2.5, life: 1 });
+  }
+  function draw(t) {
+    ctx.clearRect(0, 0, W, H);
+    const span = H * 1.4;
+    for (const s of stars) {
+      let y = (s.y - scrollY * 0.12 * s.d) % span; if (y < 0) y += span;
+      if (y > H + 4) continue;
+      const x = s.x + mouse.x * 14 * s.d;
+      const a = reduce ? 0.8 : 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(t / 1000 * s.tw + s.ph));
+      ctx.fillStyle = `rgba(${s.hue},${(a * (0.4 + 0.6 * s.d)).toFixed(3)})`;
+      ctx.beginPath(); ctx.arc(x, y, s.r, 0, 6.283); ctx.fill();
+      if (s.r > 1.4) {  // brightest stars get a soft glow
+        ctx.fillStyle = `rgba(${s.hue},${(a * 0.12).toFixed(3)})`;
+        ctx.beginPath(); ctx.arc(x, y, s.r * 4, 0, 6.283); ctx.fill();
+      }
+    }
+    for (const m of shooters) {
+      const tail = ctx.createLinearGradient(m.x, m.y, m.x - m.vx * 14, m.y - m.vy * 14);
+      tail.addColorStop(0, `rgba(220,250,255,${m.life})`); tail.addColorStop(1, "rgba(95,242,255,0)");
+      ctx.strokeStyle = tail; ctx.lineWidth = 1.8; ctx.lineCap = "round";
+      ctx.beginPath(); ctx.moveTo(m.x, m.y); ctx.lineTo(m.x - m.vx * 14, m.y - m.vy * 14); ctx.stroke();
+      m.x += m.vx; m.y += m.vy; m.life -= 0.012;
+    }
+    shooters = shooters.filter(m => m.life > 0 && m.x < W + 200 && m.y < H + 200);
+  }
+  addEventListener("resize", resize); resize();
+
+  // ---------- parallax on scroll + mouse ----------
+  const depthEls = [...document.querySelectorAll("[data-depth]")];
+  const glow = document.getElementById("glow"), bar = document.querySelector(".progress");
+  function parallax() {
+    const y = scrollY;
+    if (y < innerHeight * 1.3) {
+      for (const L of layers) L.el.setAttribute("transform", `translate(${(mouse.x * L.mx).toFixed(1)} ${(y * L.depth).toFixed(1)})`);
+      for (const el of depthEls) {
+        const d = parseFloat(el.dataset.depth);
+        el.style.transform = `translate3d(${(-mouse.x * 10 * d).toFixed(1)}px, ${(y * d).toFixed(1)}px, 0)`;
+        if (el.classList.contains("hero-content")) el.style.opacity = Math.max(0, 1 - y / (innerHeight * 0.75));
+      }
+    }
+    const max = document.documentElement.scrollHeight - innerHeight;
+    bar.style.width = (max > 0 ? (y / max) * 100 : 0) + "%";
+  }
+  addEventListener("scroll", () => { scrollY = window.scrollY; if (reduce) parallax(); }, { passive: true });
+  addEventListener("pointermove", e => {
+    mouse.x = e.clientX / innerWidth * 2 - 1; mouse.y = e.clientY / innerHeight * 2 - 1;
+    glow.style.left = e.clientX + "px"; glow.style.top = e.clientY + "px";
+  }, { passive: true });
+
+  function frame(t) {
+    if (!reduce) { draw(t); parallax(); if (Math.random() < 0.004) shoot(); }
+    requestAnimationFrame(frame);
+  }
+  if (!reduce) requestAnimationFrame(frame); else parallax();
+  document.querySelectorAll(".join").forEach(b => b.addEventListener("pointerenter", () => { if (!reduce) { shoot(); shoot(); } }));
+
+  // ---------- cards tilt toward the cursor, with a light that follows it ----------
+  if (!reduce && matchMedia("(pointer: fine)").matches) {
+    document.querySelectorAll(".card").forEach(c => {
+      c.addEventListener("pointermove", e => {
+        const r = c.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+        c.style.setProperty("--mx", px * 100 + "%"); c.style.setProperty("--my", py * 100 + "%");
+        c.style.transform = `rotateX(${((0.5 - py) * 8).toFixed(2)}deg) rotateY(${((px - 0.5) * 10).toFixed(2)}deg) translateZ(0)`;
+      });
+      c.addEventListener("pointerleave", () => c.style.transform = "");
+    });
+  }
+
+  // ---------- reveal sections as they scroll in ----------
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }), { threshold: 0.15 });
+  document.querySelectorAll(".reveal").forEach((el, i) => { el.style.transitionDelay = (i % 6) * 0.07 + "s"; io.observe(el); });
+
+  // ---------- a clock that knows if you're up late ----------
+  function clock() {
+    const now = new Date(), h = now.getHours();
+    const t = now.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }).toLowerCase();
+    const msg = h >= 22 ? "the night's just getting started."
+      : h < 5 ? "you're up late. so are we."
+      : h < 8 ? "still up, or up early? either way, welcome."
+      : h < 18 ? "we come alive after dark, but someone's always around."
+      : "almost our time.";
+    document.getElementById("clock").textContent = `it's ${t} where you are. ${msg}`;
+  }
+  clock(); setInterval(clock, 20000);
+
+  // ---------- live member counts from Discord (page numbers are the fallback) ----------
+  function countUp(el, to) {
+    if (reduce) { el.textContent = to.toLocaleString("en-US"); return; }
+    const start = performance.now(), dur = 1600;
+    (function step(now) { const p = Math.min(1, (now - start) / dur), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(to * e).toLocaleString("en-US"); if (p < 1) requestAnimationFrame(step); })(start);
+  }
   fetch("https://discord.com/api/v10/invites/drowse?with_counts=true")
     .then(r => r.ok ? r.json() : Promise.reject())
     .then(d => {
-      const fmt = n => n.toLocaleString("en-US");
-      if (d.approximate_presence_count) document.getElementById("online").textContent = fmt(d.approximate_presence_count);
-      if (d.approximate_member_count) document.getElementById("members").textContent = fmt(d.approximate_member_count);
-    })
-    .catch(() => {});
+      if (d.approximate_presence_count) countUp(document.getElementById("online"), d.approximate_presence_count);
+      if (d.approximate_member_count) countUp(document.getElementById("members"), d.approximate_member_count);
+    }).catch(() => {});
+})();
 </script>
 </body>
 </html>
